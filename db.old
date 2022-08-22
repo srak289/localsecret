@@ -1,0 +1,80 @@
+import logging
+
+import sqlite3 as sl
+from sqlite3 import OperationalError
+from pathlib import PosixPath
+
+__all__ = []
+
+def handler(func, *args, posthook=None, **kwargs):
+    def wrap(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except OperationalError as e:
+            logging.warning(f'Suppressing OperationalError {e}')
+        finally:
+            if posthook != None:
+                posthook(*args, **kwargs)
+    return wrap
+
+def strip(s):
+    return s.replace(';','')
+
+class Driver:
+    '''
+    Open a new db at `filepath` and initialize schema
+    '''
+    def __init__(self, tablename, filepath=str(PosixPath(__file__).parent/'default.db')):
+        self._schema = {
+            'id':'TEXT PRIMARY KEY',
+            'data':'BLOB NOT NULL',
+            'iv':'BLOB NOT NULL',
+            'salt':'BLOB NOT NULL'
+        }
+        self._tablename = tablename
+        self._filepath = filepath
+        self._con = sl.connect(self._filepath)
+
+        self._init_db()
+
+    @property
+    def con(self):
+        return self._con
+
+    def safe_execute(self, s):
+        return self.con.execute(s.replace(';','')+';')
+
+    @handler
+    def _init_db(self):
+        schema = ','.join([f'{k} {v}' for k,v in self._schema.items()])
+        cur = self.safe_execute(f"""CREATE TABLE IF NOT EXISTS {self._tablename} ({schema})""")
+
+    @handler
+    def insert(self, **kwargs):
+        keys = ', '.join([k for k in self._schema.keys() if k in kwargs])
+        values = ', '.join([str(v) for k,v in kwargs.items() if k in keys])
+        breakpoint()
+        # memoryview
+        cur = self.safe_execute(f"""INSERT INTO {self._tablename} ({keys}) values ({values})""")
+
+    @handler
+    def select(self):
+        # cur = self.safe_execute(f"""SELECT {} FROM {} WHERE {} = {}""")
+        pass
+
+    @handler
+    def update(self):
+        # cur = self.safe_execute("""UPDATE (?) SET (?) = (?) WHERE (?) = (?);""")
+        pass
+
+    @handler
+    def delete(self):
+        # cur = self.safe_execute("""DELETE FROM (?) values (?);""")
+        pass
+
+__all__ += ['Driver']
+
+if __name__ == '__main__':
+    d = Driver('test_table', filepath=':memory:')
+    d.insert(id='cat',data=b'trash',salt='mod',iv='initv')
+    breakpoint()

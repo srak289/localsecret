@@ -1,0 +1,17 @@
+from . import Secrets
+
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument("-n", "--new", help="New secret")
+parser.add_argument("-p", "--password", help="New secret")
+parser.add_argument("-c", "--certificate", help="Use machine certificate encipherment for hybrid encryption of secrets")
+parser.add_argument("--xor-secret", default="/etc/hostname", help="Specify the key file for xor operations")
+parser.add_argument("-n", "--new", help="New secret")
+parser.add_argument("-n", "--new", help="New secret")
+args = parser.parse_args()
+
+if args.new:
+if args.password:
+if args.certificate:
+if args.xor_secret:

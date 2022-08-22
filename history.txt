@@ -1,0 +1,49 @@
+ 1430  openssl enc -aes256 -in crap.txt -out crap.enc
+ 1433  openssl enc -aes256 -d -in crap.enc -out crap.new
+ 1436  openssl enc -aes256 -d -in crap.enc
+ 1721  openssl enc -list
+ 1722  openssl enc -list | less
+ 1756  man openssl
+ 1757  openssl list standard-commands
+ 1758  man openssl
+ 1760  man openssl aes256
+ 1761  man openssl-aes256
+ 1762  openssl aes256
+ 1763  openssl enc aes256
+ 1764  openssl aes256 -help
+ 1765  openssl enc -help
+ 1766  openssl enc -pbkdf2 -k pass:shitstormheadmaster -P
+ 1767  openssl enc -pbkdf2 -k pass:shitstormheadmaster -P -in /dev/null
+ 1768  openssl enc -pbkdf2 -k pass:'ass' -P -in /dev/null
+ 1769  openssl enc -P -pbkdf2 -k pass:'ass' -in /dev/null
+ 1770  openssl enc -P -pbkdf2 -k ass -in /dev/null
+ 1771  openssl enc -P -pbkdf2 -k ass -in
+ 1772  openssl enc -P -pbkdf2 -k ass -in /dev/urandom
+ 1778  man openssl
+ 2001  echo "trashcan" | openssl enc -aes256 -p pass:'meatmasher'
+ 2002  echo "trashcan" | openssl enc -aes256 -a -p pass:'meatmasher'
+ 2003  man openssl enc
+ 2004  echo "trashcan" | openssl enc -aes256 -p -k pass:'meatmasher'
+ 2005  echo "trashcan" | openssl enc -aes256 -p -pbkdf2 -k pass:'meatmasher'
+ 2006  echo "trashcan" | openssl enc -aes256 -pbkdf2 -k pass:'meatmasher'
+ 2007  echo "trashcan" | openssl enc -aes256 -pbkdf2 -k pass:'meatmasher' > test.aes
+ 2009  openssl enc -d -in test.aes -pbkdf2 -k pass:'meatmasher'
+ 2010  openssl enc -d -in test.aes -pbkdf2 -k pass:'meatmasher' -out shit.txt
+ 2012  openssl enc -aes256 -d -in test.aes -pbkdf2 -k pass:'meatmasher' -out shit.txt
+ 2014  cat test.aes | openssl enc -aes256 -d -pbkdf2 -k pass:'meatmasher'
+ 2015  openssl enc -aes256 -d -pbkdf2 -k pass:'meatmasher' < test.aes
+ 2016  openssl enc -aes256 -d -pbkdf2 -k pass:'meatmasher' < test.aes > shit.txt
+ 2019  openssl enc -aes256 -d -pbkdf2 -k pass:'meatmasher' < test.aes > nes.txt
+ 2022  man openssl
+ 2024  man openssl
+ 2025  echo -n "secret" | openssl enc -aes256 -e -pbkdf2 -pass file:<(echo -n 'meatmasher' ) > txt.aes256
+ 2027  openssl enc -aes256 -d -pbkdf2 -pass file:<(echo -n 'meatmasher' ) < txt.aes256
+ 2028  openssl enc -aes256 -e -pbkdf2 -pass file:<(echo -n 'meatmasher' ) <( echo -n 'secret' )
+ 2029  openssl enc -aes256 -e -pbkdf2 -pass file:<(echo -n 'meatmasher' ) <echo -n 'secret'
+ 2030  openssl enc -aes256 -e -pbkdf2 -pass file:<(echo -n 'meatmasher' ) <'secret'
+ 2031  openssl enc -aes256 -e -pbkdf2 -pass file:<(echo -n 'meatmasher' ) <(echo -n 'secret')
+ 2032  openssl enc -aes256 -e -pbkdf2 -pass file:<(echo -n 'meatmasher' ) -in <(echo -n 'secret')
+ 2033  openssl enc -aes256 -e -pbkdf2 -pass file:<(echo -n 'meatmasher' ) -in <(echo -n 'secret') > txt.aes
+ 2034  openssl enc -aes256 -d -pbkdf2 -pass file:<(echo -n 'meatmasher' ) -in < txt.aes
+ 2035  openssl enc -aes256 -d -pbkdf2 -pass file:<(echo -n 'meatmasher' ) -in <(cat txt.aes)
+ 2037  history | grep openssl > projects/localsecret/history.txt
