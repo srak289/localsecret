@@ -4,7 +4,7 @@ from json import loads, dumps
 from re import match
 
 class Secrets:
-    def __init__(self, path=f'{__file__}', key='/etc/hostname'):
+    def __init__(self, path=f'{__file__}', keyfile='/etc/hostname'):
         self.path = path
         self.__keyfile = keyfile
 
